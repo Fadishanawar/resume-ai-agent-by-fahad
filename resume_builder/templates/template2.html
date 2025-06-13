@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ resume_title }}</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Lato', 'Open Sans', sans-serif;
+      background-color: #f2f2f2;
+      color: #555;
+      display: flex;
+      justify-content: center;
+      padding: 3rem 1rem;
+    }
+
+    .resume-container {
+      display: flex;
+      max-width: 1100px;
+      width: 100%;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 32%;
+      background-color: #3e3e3e;
+      color: white;
+      padding: 2.8rem 2rem;
+    }
+
+    .sidebar .photo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 4px solid white;
+      overflow: hidden;
+      margin: 0 auto 2rem;
+    }
+
+    .sidebar .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .sidebar h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.2rem;
+      margin: 2rem 0 0.6rem;
+      text-transform: uppercase;
+      border-bottom: 1px solid #ffffff44;
+      padding-bottom: 0.5rem;
+    }
+
+    .sidebar p {
+      margin: 0.4rem 0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .main {
+      width: 68%;
+      padding: 3rem 2.5rem;
+    }
+
+    .main h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      color: #222;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .main > p {
+      font-size: 1.05rem;
+      margin-bottom: 2.2rem;
+      line-height: 1.7;
+    }
+
+    .main h3 {
+      margin-top: 2.4rem;
+      color: #333;
+      text-transform: uppercase;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+
+    .timeline {
+      position: relative;
+      margin-top: 1.2rem;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      background: #ccc;
+    }
+
+    .timeline-entry {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -10px;
+      top: 0.4rem;
+      width: 12px;
+      height: 12px;
+      background: #333;
+      border-radius: 50%;
+    }
+
+    .timeline-entry h4 {
+      font-size: 1.05rem;
+      color: #222;
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-entry p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    ul {
+      margin-top: 1rem;
+      padding-left: 1.2rem;
+    }
+
+    ul li {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="resume-container">
+    <div class="sidebar">
+      <div class="photo">
+        <img src="{{ profile_image }}" alt="Profile Photo"/>
+      </div>
+
+      <h2>Contact</h2>
+      <p><strong>Email:</strong> {{ email }}</p>
+      <p><strong>Phone:</strong> {{ phone }}</p>
+      <p><strong>Location:</strong> {{ address }}</p>
+
+      <h2>Languages</h2>
+      {% for lang in languages %}
+        <p>{{ lang }}</p>
+      {% endfor %}
+
+      <h2>Education</h2>
+      {% for edu in education %}
+        <p><strong>{{ edu.degree }}</strong></p>
+        <p>{{ edu.institution }}</p>
+        <p>{{ edu.year }}</p>
+      {% endfor %}
+    </div>
+
+    <div class="main">
+      <h1>{{ full_name }}</h1>
+      <p>{{ summary }}</p>
+
+      <h3>Experience</h3>
+      <div class="timeline">
+        {% for exp in experience %}
+        <div class="timeline-entry">
+          <h4>{{ exp.position }} - {{ exp.company }}</h4>
+          <p>{{ exp.years }} years</p>
+        </div>
+        {% endfor %}
+
+        <!-- Skills section under experience -->
+        <div class="timeline-entry">
+          <h4>Skills</h4>
+          <ul>
+            {% for skill in skills %}
+              <li>{{ skill }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+      <h3>References</h3>
+      <ul>
+        {% for ref in references %}
+          <li>{{ ref.name }} - {{ ref.contact }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

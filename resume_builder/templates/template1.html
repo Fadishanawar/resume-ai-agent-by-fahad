@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ full_name }} - Resume</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #2c3e50;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            max-width: 1200px;
+            margin: 40px auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .left {
+            width: 35%;
+            padding: 30px;
+            background: #2c3e50;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .right {
+            width: 65%;
+            padding: 30px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            color: #2c3e50;
+        }
+
+        .left h2 {
+            border-color: #ecf0f1;
+            color: #ecf0f1;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-weight: 600;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        p {
+            margin: 5px 0;
+            line-height: 1.5;
+        }
+
+        small {
+            color: #777;
+        }
+
+        .contact-info p {
+            margin: 4px 0;
+            font-size: 14px;
+        }
+
+        .resume-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #bdc3c7;
+        }
+
+        .highlight {
+            color: #3498db;
+        }
+
+        .company {
+            font-weight: 500;
+            color: #555;
+        }
+
+        #profileImage {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ffffff;
+            margin: 0 auto 15px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            {% if profile_image %}
+                <img src="{{ profile_image }}" id="profileImage">
+            {% endif %}
+            <h1>{{ full_name }}</h1>
+            <div class="resume-title">{{ resume_title }}</div>
+            <div class="contact-info">
+                <p>{{ email }}</p>
+                <p>{{ phone }}</p>
+                <p>{{ address }}</p>
+            </div>
+
+            {% if languages %}
+                <h2>Languages</h2>
+                <ul>
+                    {% for lang in languages %}
+                        <li>{{ lang }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if references %}
+                <h2>References</h2>
+                <ul>
+                    {% for ref in references %}
+                        <li>{{ ref.name }} — {{ ref.contact }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
+        <div class="right">
+            {% if summary %}
+                <h2>Summary</h2>
+                <p>{{ summary }}</p>
+            {% endif %}
+
+            {% if education %}
+                <h2>Education</h2>
+                {% for edu in education %}
+                    <p>
+                        <span class="highlight">{{ edu.degree }}</span>, {{ edu.institution }}
+                        <br><small>{{ edu.year }}</small>
+                    </p>
+                {% endfor %}
+            {% endif %}
+
+            {% if experience %}
+                <h2>Experience</h2>
+                {% for exp in experience %}
+                    <p>
+                        <span class="highlight">{{ exp.title }}</span> — <span class="company">{{ exp.company }}</span><br>
+                        <small>{{ exp.duration }}</small>
+                    </p>
+                {% endfor %}
+            {% endif %}
+
+            {% if skills %}
+                <h2>Skills</h2>
+                <ul>
+                    {% for skill in skills %}
+                        <li>{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if certifications %}
+                <h2>Certifications</h2>
+                <ul>
+                    {% for cert in certifications %}
+                        <li>{{ cert }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if projects %}
+                <h2>Projects</h2>
+                {% for proj in projects %}
+                    <p>
+                        <span class="highlight">{{ proj.name }}</span><br>
+                        <small>{{ proj.description }}</small>
+                    </p>
+                {% endfor %}
+            {% endif %}
+
+            {% if interests %}
+                <h2>Interests</h2>
+                <ul>
+                    {% for interest in interests %}
+                        <li>{{ interest }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

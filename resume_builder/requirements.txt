@@ -1,0 +1,6 @@
+cohere
+cohere
+gradio
+jinja2
+weasyprint
+python-dotenv

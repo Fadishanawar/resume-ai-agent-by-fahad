@@ -1,0 +1,244 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ full_name }} - Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700&family=Montserrat:wght@700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background: #f7f9fc;
+      color: #222222;
+    }
+    .container {
+      width: 92%;
+      max-width: 1100px;
+      margin: 40px auto;
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .top {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      background-color: #1A3556;
+      color: #FFFFFF;
+      padding: 40px;
+      flex-wrap: wrap;
+    }
+    .profile-wrapper {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      flex-shrink: 0;
+    }
+    .profile-wrapper::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      width: 100%;
+      height: 100%;
+      border: 6px solid #002D5B;
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .profile-pic {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 5px solid #FDBF4F;
+      object-fit: cover;
+      position: relative;
+      z-index: 1;
+    }
+    .right-top {
+      flex: 1;
+    }
+    .name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      margin: 0 0 10px;
+    }
+    .title {
+      font-family: 'Lato', sans-serif;
+      font-size: 20px;
+      font-weight: 300;
+      margin: 0 0 15px;
+      color: #E0E0E0;
+    }
+    .bio {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #D3D3D3;
+      max-width: 600px;
+    }
+    .section-title {
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-size: 16px;
+      border-bottom: 2px solid #FDBF4F;
+      display: inline-block;
+      padding-bottom: 4px;
+    }
+    .work-item {
+      margin-bottom: 18px;
+    }
+    .company {
+      font-weight: bold;
+      font-size: 15px;
+    }
+    .years {
+      font-weight: bold;
+      font-size: 13px;
+      color: #555;
+    }
+    .work-item ul {
+      margin-top: 8px;
+      padding-left: 20px;
+    }
+    .work-item ul li {
+      font-size: 14px;
+      list-style: disc;
+      color: #4B4B4B;
+      margin-bottom: 5px;
+    }
+    .bottom {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 35px 40px;
+      gap: 20px;
+    }
+    .left-bottom, .right-bottom {
+      width: 48%;
+      min-width: 300px;
+    }
+    .info-section {
+      margin-bottom: 25px;
+    }
+    .info-section h3 {
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      font-size: 15px;
+      color: #222222;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 3px;
+    }
+    .info-section p, .info-section li {
+      font-size: 14px;
+      color: #4B4B4B;
+      margin: 6px 0;
+    }
+    .info-section ul {
+      padding-left: 20px;
+    }
+    .info-section ul li {
+      list-style-type: disc;
+    }
+    .contact-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .contact-info i {
+      margin-right: 12px;
+      font-size: 16px;
+      color: #1A3556;
+      width: 20px;
+    }
+    @media (max-width: 768px) {
+      .left-bottom, .right-bottom {
+        width: 100%;
+      }
+      .top {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+      }
+      .right-top {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Top Section -->
+    <div class="top">
+      <div class="profile-wrapper">
+        <img src="{{ profile_image }}" alt="Profile" class="profile-pic" />
+      </div>
+      <div class="right-top">
+        <h1 class="name">{{ full_name }}</h1>
+        <h2 class="title">{{ resume_title }}</h2>
+        <p class="bio">{{ summary }}</p>
+      </div>
+    </div>
+
+    <!-- Bottom Section -->
+    <div class="bottom">
+      <!-- Left Bottom -->
+      <div class="left-bottom">
+        <div class="info-section">
+          <h3>Education</h3>
+          {% for edu in education %}
+          <p><strong>{{ edu.institution }}</strong><br>{{ edu.degree }}</p>
+          {% endfor %}
+        </div>
+        <div class="info-section">
+          <h3>Languages</h3>
+          <ul>
+            {% for lang in languages %}
+              <li>{{ lang }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="info-section">
+          <h3>Skills</h3>
+          <ul>
+            {% for skill in skills %}
+              <li>{{ skill }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right Bottom -->
+      <div class="right-bottom">
+        <div class="info-section">
+          <h3>Work Experience</h3>
+          {% for job in experience %}
+          <div class="work-item">
+            <div class="company">{{ job.company }}</div>
+            <div class="years">{{ job.years }}</div>
+            <ul>
+              {% for point in job.details %}
+                <li>{{ point }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="info-section">
+          <h3>Contact Information</h3>
+          <div class="contact-info"><i class="fas fa-phone-alt"></i><span>{{ phone }}</span></div>
+          <div class="contact-info"><i class="fas fa-envelope"></i><span>{{ email }}</span></div>
+          <div class="contact-info"><i class="fas fa-map-marker-alt"></i><span>{{ address }}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
